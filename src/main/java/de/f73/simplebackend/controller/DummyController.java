@@ -2,6 +2,8 @@ package de.f73.simplebackend.controller;
 
 import java.util.Collection;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,6 @@ import de.f73.simplebackend.DTO.DummyDto;
 import de.f73.simplebackend.service.DummyService;
 import org.springframework.web.bind.annotation.PutMapping;
 
-import org.apache.log4j.Logger;
-
-
 /**
  * DummyController
  */
@@ -28,7 +27,7 @@ public class DummyController {
     @Autowired
     DummyService dummyService;
 
-    private static final java.util.logging.Logger LOG = Logger.getLogger(className.class);
+    private static final Logger LOG = LogManager.getLogger("Controller") ;
     
     @GetMapping("/")
     public ResponseEntity<String> justSlash() {
