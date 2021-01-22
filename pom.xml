@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>de.f73</groupId>
-	<artifactId>simplebackend</artifactId>
+	<artifactId>adlbackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>simplebackend</name>
-	<description>simplebackend</description>
+	<name>adlbackend</name>
+	<description>adlbackend</description>
 
 	<properties>
 		<java.version>1.8</java.version>

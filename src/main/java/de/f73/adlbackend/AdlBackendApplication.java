@@ -7,10 +7,10 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-public class SimplebackendApplication {
+public class AdlBackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SimplebackendApplication.class, args);
+		SpringApplication.run(AdlBackendApplication.class, args);
 	}
 
 	@Bean
