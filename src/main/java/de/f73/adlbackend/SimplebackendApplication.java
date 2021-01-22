@@ -1,4 +1,4 @@
-package de.f73.simplebackend;
+package de.f73.adlbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

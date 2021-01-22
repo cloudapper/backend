@@ -1,0 +1,40 @@
+package de.f73.adlbackend.service;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import de.f73.adlbackend.DTO.CarDataDto;
+import de.f73.adlbackend.persistence.models.CarDataEntity;
+import de.f73.adlbackend.persistence.repositories.CarDataEntityRepository;
+
+@Service
+public class CarDataService {
+    
+    @Autowired
+    CarDataEntityRepository carDataEntityRepository;
+
+    public CarDataDto save(CarDataDto carDataDTO){
+        CarDataEntity carDataEntity = getCarDataEntityFrom(carDataDTO);
+        CarDataEntity returnedCarDataEntity = carDataEntityRepository.save(carDataEntity);
+        return getCarDataDtoFrom(returnedCarDataEntity);
+    }
+
+    private CarDataEntity getCarDataEntityFrom(CarDataDto carDataDTO) {
+        CarDataEntity carDataEntity = new CarDataEntity();
+        carDataEntity.setId(carDataDTO.getId());
+        return carDataEntity;
+    }
+
+    private CarDataDto getCarDataDtoFrom(CarDataEntity carDataDTO) {
+        CarDataDto carDataDto = new CarDataDto();
+        carDataDto.setId(carDataDTO.getId());
+        return carDataDto;
+    }
+
+	public Collection<CarDataDto> findByFin(String fin) {
+		return carDataEntityRepository.findByFin(fin).stream().map(this::getCarDataDtoFrom).collect(Collectors.toList());
+	}
+}
