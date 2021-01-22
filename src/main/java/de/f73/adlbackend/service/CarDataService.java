@@ -19,7 +19,7 @@ public class CarDataService {
 
     public CarDataDto save(CarDataDto carDataDTO){
         CarDataEntity carDataEntity = getCarDataEntityFrom(carDataDTO);
-        carDataDTO.setTimestamp(LocalDateTime.now());
+        carDataEntity.setTimestamp(LocalDateTime.now());
         CarDataEntity returnedCarDataEntity = carDataEntityRepository.save(carDataEntity);
         return getCarDataDtoFrom(returnedCarDataEntity);
     }
