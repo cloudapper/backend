@@ -24,13 +24,17 @@ public class CarDataService {
 
     private CarDataEntity getCarDataEntityFrom(CarDataDto carDataDTO) {
         CarDataEntity carDataEntity = new CarDataEntity();
-        carDataEntity.setId(carDataDTO.getId());
+        carDataEntity.setFin(carDataDTO.getFin());
+        carDataEntity.setTimestamp(carDataDTO.getTimestamp());
+        carDataEntity.setData(carDataDTO.getData());
         return carDataEntity;
     }
 
-    private CarDataDto getCarDataDtoFrom(CarDataEntity carDataDTO) {
+    private CarDataDto getCarDataDtoFrom(CarDataEntity carDataEntity) {
         CarDataDto carDataDto = new CarDataDto();
-        carDataDto.setId(carDataDTO.getId());
+        carDataDto.setFin(carDataEntity.getFin());
+        carDataDto.setTimestamp(carDataEntity.getTimestamp());
+        carDataDto.setData(carDataEntity.getData());
         return carDataDto;
     }
 
