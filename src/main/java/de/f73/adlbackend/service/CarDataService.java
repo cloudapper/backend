@@ -25,7 +25,6 @@ public class CarDataService {
     private CarDataEntity getCarDataEntityFrom(CarDataDto carDataDTO) {
         CarDataEntity carDataEntity = new CarDataEntity();
         carDataEntity.setFin(carDataDTO.getFin());
-        carDataEntity.setTimestamp(carDataDTO.getTimestamp());
         carDataEntity.setData(carDataDTO.getData());
         return carDataEntity;
     }
