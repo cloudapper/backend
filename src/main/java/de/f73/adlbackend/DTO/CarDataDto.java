@@ -8,7 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CarDataDto {
-    private String id;
     private String fin;
     private LocalDateTime timestamp;
     private String[] data; 

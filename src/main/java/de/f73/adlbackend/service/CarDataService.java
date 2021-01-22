@@ -1,5 +1,6 @@
 package de.f73.adlbackend.service;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ public class CarDataService {
 
     public CarDataDto save(CarDataDto carDataDTO){
         CarDataEntity carDataEntity = getCarDataEntityFrom(carDataDTO);
+        carDataDTO.setTimestamp(LocalDateTime.now());
         CarDataEntity returnedCarDataEntity = carDataEntityRepository.save(carDataEntity);
         return getCarDataDtoFrom(returnedCarDataEntity);
     }
