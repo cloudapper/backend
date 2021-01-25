@@ -1,6 +1,7 @@
 package de.f73.adlbackend;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
+    @Value("${SPRING_BASIC_AUTH_USER}")
+    private String basicAuthUser;
+    @Value("${SPRING_BASIC_AUTH_PW}")
+    private String basicAuthPassword;
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception
     {
@@ -26,8 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             throws Exception
     {
         auth.inMemoryAuthentication()
-                .withUser("user")
-                .password("{noop}password")
+                .withUser(basicAuthUser)
+                .password("{noop}" + basicAuthPassword)
                 .roles("USER");
     }
 }
