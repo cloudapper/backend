@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.f73.adlbackend.DTO.CarDataDto;
+import de.f73.adlbackend.persistence.models.CarDataEntity;
+import de.f73.adlbackend.persistence.repositories.CarDataEntityRepository;
 import de.f73.adlbackend.service.CarDataService;
 
 /**
@@ -24,6 +26,9 @@ public class CarDataController {
 
     @Autowired
     CarDataService carDataService;
+
+    @Autowired
+    CarDataEntityRepository carDataEntityRepository;
 
     private static final Logger LOG = LogManager.getLogger("Controller") ;
     
@@ -43,5 +48,21 @@ public class CarDataController {
     public ResponseEntity<Collection<CarDataDto>> getDataByFin(@PathVariable String fin) {
         LOG.info("Request on /data");
         return new ResponseEntity<>(carDataService.findByFin(fin), HttpStatus.OK);
+    }    
+
+    @GetMapping("/datasort/{fin}")
+    public ResponseEntity<Collection<CarDataEntity>> getDataByFinSorted(@PathVariable String fin) {
+        LOG.info("Request on /data");
+        return new ResponseEntity<>(carDataEntityRepository.findByFinOrderByTimestampDesc(fin), HttpStatus.OK);
+    }    
+    @GetMapping("/datasorta/{fin}")
+    public ResponseEntity<Collection<CarDataEntity>> getDataByFinSortedAsc(@PathVariable String fin) {
+        LOG.info("Request on /data");
+        return new ResponseEntity<>(carDataEntityRepository.findByFinOrderByTimestampAsc(fin), HttpStatus.OK);
+    }    
+    @GetMapping("/datawild/{fin}")
+    public ResponseEntity<Collection<CarDataEntity>> getDataByFinSortedwild(@PathVariable String fin) {
+        LOG.info("Request on /data");
+        return new ResponseEntity<>(carDataEntityRepository.findByFinOrderByTimestampAsc(fin), HttpStatus.OK);
     }    
 }
