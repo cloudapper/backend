@@ -1,5 +1,6 @@
 package de.f73.adlbackend.controller;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import org.apache.logging.log4j.LogManager;
@@ -49,20 +50,10 @@ public class CarDataController {
         LOG.info("Request on /data");
         return new ResponseEntity<>(carDataService.findByFin(fin), HttpStatus.OK);
     }    
-
-    @GetMapping("/datasort/{fin}")
-    public ResponseEntity<Collection<CarDataEntity>> getDataByFinSorted(@PathVariable String fin) {
-        LOG.info("Request on /data");
-        return new ResponseEntity<>(carDataEntityRepository.findByFinOrderByTimestampDesc(fin), HttpStatus.OK);
-    }    
-    @GetMapping("/datasorta/{fin}")
-    public ResponseEntity<Collection<CarDataEntity>> getDataByFinSortedAsc(@PathVariable String fin) {
-        LOG.info("Request on /data");
-        return new ResponseEntity<>(carDataEntityRepository.findByFinOrderByTimestampAsc(fin), HttpStatus.OK);
-    }    
+  
     @GetMapping("/datawild/{fin}")
     public ResponseEntity<Collection<CarDataEntity>> getDataByFinSortedwild(@PathVariable String fin) {
         LOG.info("Request on /data");
-        return new ResponseEntity<>(carDataEntityRepository.findByFinOrderByTimestampAsc(fin), HttpStatus.OK);
+        return new ResponseEntity<>(carDataEntityRepository.findByFinAndByTimestampBetweenOrderByTimestampDesc(fin, LocalDateTime.now().minusMinutes(180) , LocalDateTime.now()), HttpStatus.OK);
     }    
 }
