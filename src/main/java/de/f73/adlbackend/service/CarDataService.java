@@ -4,7 +4,12 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import javax.naming.ldap.SortKey;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 
 import de.f73.adlbackend.DTO.CarDataDto;
@@ -24,6 +29,11 @@ public class CarDataService {
         return getCarDataDtoFrom(returnedCarDataEntity);
     }
 
+    public Collection<CarDataDto> findByFin(String fin) {
+        return carDataEntityRepository.findByFinOrderByTimestampDesc(fin).stream().map(this::getCarDataDtoFrom).collect(Collectors.toList());
+        // return carDataEntityRepository.findByFin(fin, Sort.by(Sort.Direction.DESC, "timestamp")).stream().map(this::getCarDataDtoFrom).collect(Collectors.toList());
+    }
+
     private CarDataEntity getCarDataEntityFrom(CarDataDto carDataDTO) {
         CarDataEntity carDataEntity = new CarDataEntity();
         carDataEntity.setFin(carDataDTO.getFin());
@@ -38,8 +48,4 @@ public class CarDataService {
         carDataDto.setData(carDataEntity.getData());
         return carDataDto;
     }
-
-	public Collection<CarDataDto> findByFin(String fin) {
-		return carDataEntityRepository.findByFin(fin).stream().map(this::getCarDataDtoFrom).collect(Collectors.toList());
-	}
 }
