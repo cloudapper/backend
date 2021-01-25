@@ -17,7 +17,7 @@ import de.f73.adlbackend.DTO.CarDataDto;
 import de.f73.adlbackend.service.CarDataService;
 
 /**
- * DummyController
+ * CarDataController
  */
 @RestController
 public class CarDataController {
