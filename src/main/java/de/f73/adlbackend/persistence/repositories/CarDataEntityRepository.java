@@ -14,6 +14,6 @@ public interface CarDataEntityRepository extends PagingAndSortingRepository<CarD
     public List<CarDataEntity> findByFinOrderByTimestampDesc(String fin);
     public List<CarDataEntity> findByFinOrderByTimestampAsc(String fin);
 
-    public List<CarDataEntity> findByFinTimestampGreaterThanOrderByTimestampDesc(String fin, LocalDateTime timestamp);
-    public List<CarDataEntity> findByFinTimestampGreaterThan(String fin, LocalDateTime timestamp);
+    public List<CarDataEntity> findByFinAndTimestampGreaterThanAndOrderByTimestampDesc(String fin, LocalDateTime timestamp);
+    public List<CarDataEntity> findByFinAndTimestampGreaterThan(String fin, LocalDateTime timestamp);
 }
