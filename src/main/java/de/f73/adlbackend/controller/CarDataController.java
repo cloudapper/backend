@@ -54,6 +54,12 @@ public class CarDataController {
     @GetMapping("/datawild/{fin}")
     public ResponseEntity<Collection<CarDataEntity>> getDataByFinSortedwild(@PathVariable String fin) {
         LOG.info("Request on /data");
-        return new ResponseEntity<>(carDataEntityRepository.findByFinAndTimestampBetweenOrderByTimestampDesc(fin, LocalDateTime.now().minusMinutes(180) , LocalDateTime.now()), HttpStatus.OK);
+        return new ResponseEntity<>(carDataEntityRepository.findByFinTimestampGreaterThan(fin, LocalDateTime.of(2021, 01, 25, 15, 07, 05)), HttpStatus.OK);
+    }    
+  
+    @GetMapping("/datawild2/{fin}")
+    public ResponseEntity<Collection<CarDataEntity>> getDataByFinSortedwild2(@PathVariable String fin) {
+        LOG.info("Request on /data");
+        return new ResponseEntity<>(carDataEntityRepository.findByFinTimestampGreaterThanOrderByTimestampDesc(fin, LocalDateTime.of(2021, 01, 25, 15, 07, 05)), HttpStatus.OK);
     }    
 }
