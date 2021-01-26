@@ -60,6 +60,6 @@ public class CarDataController {
     @GetMapping("/datawild2/{fin}")
     public ResponseEntity<Collection<CarDataEntity>> getDataByFinSortedwild2(@PathVariable String fin) {
         LOG.info("Request on /data");
-        return new ResponseEntity<>(carDataEntityRepository.findByFinAndTimestampGreaterThanAndOrderByTimestampDesc(fin, LocalDateTime.of(2021, 01, 25, 15, 07, 05)), HttpStatus.OK);
+        return new ResponseEntity<>(carDataEntityRepository.findByFinAndTimestampGreaterThanOrderByTimestampDesc(fin, LocalDateTime.of(2021, 01, 25, 15, 07, 05)), HttpStatus.OK);
     }    
 }
