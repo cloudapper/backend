@@ -26,7 +26,11 @@ public class CarDataService {
 
     public Collection<CarDataDto> findByFin(String fin) {
         return carDataEntityRepository.findByFinOrderByTimestampDesc(fin).stream().map(this::getCarDataDtoFrom).collect(Collectors.toList());
-        // return carDataEntityRepository.findByFin(fin, Sort.by(Sort.Direction.DESC, "timestamp")).stream().map(this::getCarDataDtoFrom).collect(Collectors.toList());
+    }
+
+    public Collection<CarDataDto> findByFinAfter(String fin, LocalDateTime timestamp) {
+        return carDataEntityRepository.findByFinAndTimestampGreaterThanOrderByTimestampDesc(fin, timestamp).stream().map(this::getCarDataDtoFrom).collect(Collectors.toList());
+        
     }
 
     private CarDataEntity getCarDataEntityFrom(CarDataDto carDataDTO) {

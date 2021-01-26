@@ -9,13 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.f73.adlbackend.DTO.CarDataDto;
-import de.f73.adlbackend.persistence.models.CarDataEntity;
 import de.f73.adlbackend.persistence.repositories.CarDataEntityRepository;
 import de.f73.adlbackend.service.CarDataService;
 
@@ -45,21 +44,13 @@ public class CarDataController {
         return new ResponseEntity<>(returnCarDataDTO, HttpStatus.CREATED);
     }
 
-    @GetMapping("/data/{fin}")
-    public ResponseEntity<Collection<CarDataDto>> getDataByFin(@PathVariable String fin) {
-        LOG.info("Request on /data");
+    @GetMapping("/data")
+    public ResponseEntity<Collection<CarDataDto>> getDataByFin(@RequestParam String fin, @RequestParam(required = false) LocalDateTime timestamp) {
+        LOG.info("Request for " + fin + " on /data");
+        if (timestamp != null) {
+            return new ResponseEntity<>(carDataService.findByFinAfter(fin, timestamp), HttpStatus.OK);
+        } 
+
         return new ResponseEntity<>(carDataService.findByFin(fin), HttpStatus.OK);
-    }    
-  
-    @GetMapping("/datawild/{fin}")
-    public ResponseEntity<Collection<CarDataEntity>> getDataByFinSortedwild(@PathVariable String fin) {
-        LOG.info("Request on /data");
-        return new ResponseEntity<>(carDataEntityRepository.findByFinAndTimestampGreaterThan(fin, LocalDateTime.of(2021, 01, 25, 15, 07, 05)), HttpStatus.OK);
-    }    
-  
-    @GetMapping("/datawild2/{fin}")
-    public ResponseEntity<Collection<CarDataEntity>> getDataByFinSortedwild2(@PathVariable String fin) {
-        LOG.info("Request on /data");
-        return new ResponseEntity<>(carDataEntityRepository.findByFinAndTimestampGreaterThanOrderByTimestampDesc(fin, LocalDateTime.of(2021, 01, 25, 15, 07, 05)), HttpStatus.OK);
-    }    
+    }   
 }
