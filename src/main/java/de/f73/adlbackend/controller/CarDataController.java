@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +46,7 @@ public class CarDataController {
     }
 
     @GetMapping("/data")
-    public ResponseEntity<Collection<CarDataDto>> getDataByFin(@RequestParam String fin, @RequestParam(required = false) LocalDateTime timestamp) {
+    public ResponseEntity<Collection<CarDataDto>> getDataByFin(@RequestParam String fin, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime timestamp) {
         LOG.info("Request for " + fin + " on /data");
         if (timestamp != null) {
             return new ResponseEntity<>(carDataService.findByFinAfter(fin, timestamp), HttpStatus.OK);
