@@ -39,14 +39,14 @@ public class CarDataController {
         return new ResponseEntity<>("You have reached the Backend - please use the defined endpoints! PS: Thanks Hendrik!",HttpStatus.OK);
     }
     @PostMapping("/data")
-    public ResponseEntity<CarDataDto> createData(@RequestBody CarDataDto carDataDTO) {
+    public ResponseEntity<CarDataDto> saveADL(@RequestBody CarDataDto carDataDTO) {
         CarDataDto returnCarDataDTO = carDataService.save(carDataDTO);
         LOG.info("Data saved: " + carDataDTO.getFin());
         return new ResponseEntity<>(returnCarDataDTO, HttpStatus.CREATED);
     }
 
     @GetMapping("/data")
-    public ResponseEntity<Collection<CarDataDto>> getDataByFin(@RequestParam String fin, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime timestamp) {
+    public ResponseEntity<Collection<CarDataDto>> retrieveADLByFin(@RequestParam String fin, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime timestamp) {
         LOG.info("Request for " + fin + " on /data");
         if (timestamp != null) {
             return new ResponseEntity<>(carDataService.findByFinAfter(fin, timestamp), HttpStatus.OK);
