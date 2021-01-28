@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: f73-g1.cloudogu.net/nexus/kassandra/adlis-backend
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   # tag: "0.0.1"
 
