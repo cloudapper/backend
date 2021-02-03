@@ -1,10 +1,10 @@
-package de.f73.simplebackend;
+package de.f73.adlbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SimplebackendApplicationTests {
+class AdlBackendApplicationTests {
 
 	@Test
 	void contextLoads() {
